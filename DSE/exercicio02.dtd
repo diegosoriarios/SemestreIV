@@ -1,0 +1,14 @@
+<!ELEMENT vendas (venda+)>
+<!ELEMENT venda (data,cliente,vendedor,total_venda,vendas_itens)>
+<!ELEMENT data (#PCDATA)>
+<!ELEMENT cliente (#PCDATA)>
+<!ELEMENT vendedor (#PCDATA)>
+<!ELEMENT total_venda (#PCDATA)>
+<!ELEMENT vendas_itens (item+)>
+<!ELEMENT item (codigo, produto, quantidade, valor_unitario, valor_total)>
+<!ELEMENT codigo (#PCDATA)>
+<!ELEMENT produto (#PCDATA)>
+<!ELEMENT quantidade (#PCDATA)>
+<!ELEMENT valor_unitario (#PCDATA)>
+<!ELEMENT valor_total (#PCDATA)>
+<!ATTLIST venda codigo CDATA #REQUIRED>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE vendas SYSTEM "trabalho02.dtd">
+<vendas>
+	<venda numero="1">
+		<data>2016-03-07</data>
+		<total>R$ 100,00</total>
+        <pessoas>
+            <cliente>
+                <telefone>12345678</telefone>
+                <nascimento>11/11/91</nascimento>
+                <conjuge>
+                    <nome>Maria</nome>
+                    <endereco>Rua 1, 5</endereco>
+                    <telefone>98765432</telefone>
+                </conjuge>
+            </cliente>
+            <vendedor>
+                <telefone>19734682</telefone>
+                <nascimento>22/05/90</nascimento>
+            </vendedor>
+        </pessoas>
+	</venda>
+</vendas>

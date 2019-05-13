@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="movimentos">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="cadastros">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="filmes">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="filme" maxOccurs="unbounded">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="codigo" type="cod" />
+                                                    <xs:element name="titulo" type="xs:string" />
+                                                    <xs:element name="categoria">
+                                                        <xs:simpleType>
+                                                            <xs:restriction base="xs:string">
+                                                                <xs:enumeration value="Ouro"></xs:enumeration>
+                                                                <xs:enumeration value="Prata"></xs:enumeration>
+                                                                <xs:enumeration value="Bronze"></xs:enumeration>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="tipo_filme">
+                                                        <xs:simpleType>
+                                                            <xs:restriction>
+                                                                <xs:enumeration value="P"></xs:enumeration>
+                                                                <xs:enumeration value="E"></xs:enumeration>
+                                                            </xs:restriction>
+                                                        </xs:simpleType>
+                                                    </xs:element>
+                                                    <xs:element name="exemplares">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="codigo_exemplar" type="cod" />
+                                                                <xs:element name="tipo_exemplar">
+                                                                    <xs:complexType>
+                                                                        <xs:choice>
+                                                                            <xs:element name="cd" type="xs:string" />
+                                                                            <xs:element name="dvd" type="xs:string" />
+                                                                        </xs:choice>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="alugado">
+                                                                    <xs:simpleType>
+                                                                        <xs:restriction>
+                                                                            <xs:enumeration value="Sim"></xs:enumeration>
+                                                                            <xs:enumeration value="Nao"></xs:enumeration>
+                                                                        </xs:restriction>
+                                                                    </xs:simpleType>
+                                                                </xs:element>
+                                                                <xs:element name="valor" type="val_decimal" />
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+
+                <xs:element name="emprestimos">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="emprestimo" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="codigo" type="cod" />
+                                        <xs:element name="data" type="xs:string" />
+                                        <xs:element name="cliente" type="xs:string" />
+                                        <xs:element name="itens">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="item" maxOccurs="unbounded">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="exemplar" type="cod" />
+                                                                <xs:element name="valor" type="val_decimal" />
+                                                                <xs:element name="desconto">
+                                                                    <xs:complexType>
+                                                                        <xs:choice>
+                                                                            <xs:element name="desconto_valor" type="val_decimal" />
+                                                                            <xs:element name="porcentagem" type="val_decimal" />
+                                                                        </xs:choice>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                                <xs:element name="data_devolucao" type="xs:string" minOccurs="0"/>
+                                                                <xs:element name="data_prevista" type="xs:string" />
+                                                                <xs:element name="multa" type="val_decimal" minOccurs="0"/>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <!--FACETS-->
+        <xs:simpleType name="cod">
+            <xs:restriction base="integer">
+                <xs:totalDigits value="5"></xs:totalDigits>
+            </xs:restriction>
+        </xs:simpleType>
+
+        <xs:simpleType name="val_decimal">
+            <xs:restriction base="decimal">
+                <xs:fractionDigits value="2"></xs:fractionDigits>
+            </xs:restriction>
+        </xs:simpleType>
+    <!--END-->
+</xs:schema>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<movimentos xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+xs:noNamespaceSchemaLocation="07_restricoes.xsd">
+    <cadastros>
+        <filmes>
+            <filme>
+                <codigo>1</codigo>
+                <titulo>SILENCIO DOS INOCENTES</titulo>
+                <categoria>Ouro</categoria>
+                <tipo_filme>E</tipo_filme>
+                <exemplares>
+                    <codigo_exemplar>00005</codigo_exemplar>
+                    <tipo_exemplar>
+                        <dvd>567898</dvd>
+                    </tipo_exemplar>
+                    <alugado>Sim</alugado>
+                    <valor>2.50</valor>
+                </exemplares>				
+            </filme>
+            <filme>
+                <codigo>00002</codigo>
+                <titulo>A ERA DO GELO</titulo>
+                <categoria>Prata</categoria>
+                <tipo_filme>E</tipo_filme>
+                <exemplares>
+                    <codigo_exemplar>00005</codigo_exemplar>
+                    <tipo_exemplar>
+                        <cd>111111</cd>
+                    </tipo_exemplar>
+                    <alugado>Não</alugado>
+                    <valor>2.50</valor>
+                </exemplares>				
+            </filme>			
+        </filmes>
+    </cadastros>	
+    <emprestimos>
+        <emprestimo>
+            <codigo>00001</codigo>
+            <data>2008-10-16</data>
+            <cliente>PEDRO DA SILVA</cliente>
+            <itens>
+                <item>
+                    <exemplar>00005</exemplar>
+                    <valor>4.50</valor>
+                    <desconto>
+                        <desconto_valor>0.50</desconto_valor>
+                    </desconto>
+                    <data_devolucao>2008-10-16</data_devolucao>
+                    <data_prevista>2008-10-15</data_prevista>
+                    <multa>4.00</multa>
+                </item>
+                <item>
+                    <exemplar>00005</exemplar>
+                    <valor>4.50</valor>
+                    <desconto>
+                        <desconto_valor>0.50</desconto_valor>
+                    </desconto>
+                    <data_devolucao>2008-10-16</data_devolucao>
+                    <data_prevista>2008-10-15</data_prevista>
+                    <multa>4.00</multa>
+                </item>
+            </itens>
+        </emprestimo>
+        <emprestimo>
+            <codigo>00002</codigo>
+            <data>2008-10-12</data>
+            <cliente>ERASMO CARLOS</cliente>
+            <itens>
+                <item>
+                    <exemplar>00005</exemplar>
+                    <valor>4.50</valor>
+                    <desconto>
+                        <porcentagem>0.50</porcentagem>
+                    </desconto>
+                    <data_prevista>2008-10-15</data_prevista>
+                </item>
+                <item>
+                    <exemplar>00005</exemplar>
+                    <valor>4.50</valor>
+                    <desconto>
+                        <desconto_valor>0.50</desconto_valor>
+                    </desconto>
+                    <data_devolucao>2008-10-16</data_devolucao>
+                    <data_prevista>2008-10-15</data_prevista>
+                    <multa>4.00</multa>
+                </item>
+            </itens>
+        </emprestimo>
+    </emprestimos>
+</movimentos>
+

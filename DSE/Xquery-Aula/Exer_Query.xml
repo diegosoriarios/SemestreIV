@@ -1,0 +1,101 @@
+<?xml version="1.0" 	encoding="UTF-8"?>
+<movimentos>
+	<cadastros>
+		<filmes>
+			<filme id="1">
+				<codigo>00001</codigo>
+				<titulo>SILENCIO DOS INOCENTES</titulo>
+				<categoria>OURO</categoria>
+				<tipo_filme>P</tipo_filme>
+				<exemplares>
+					<exemplar>
+						<codigo_exemplar>00005</codigo_exemplar>
+						<tipo_exemplar>
+							<dvd>567898</dvd>
+						</tipo_exemplar>
+						<alugado>Sim</alugado>
+						<valor>2.50</valor>
+					</exemplar>
+					<exemplar>
+						<codigo_exemplar>00006</codigo_exemplar>
+						<tipo_exemplar>
+							<dvd>567898</dvd>
+						</tipo_exemplar>
+						<alugado>Sim</alugado>
+						<valor>2.50</valor>
+					</exemplar>					
+				</exemplares>				
+			</filme>
+			<filme id = "2">
+				<codigo>00002</codigo>
+				<titulo>A ERA DO GELO</titulo>
+				<categoria>PRATA</categoria>
+				<tipo_filme>A</tipo_filme>
+				<exemplares>
+					<exemplar>
+						<codigo_exemplar>00007</codigo_exemplar>
+						<tipo_exemplar>
+							<cd>111111</cd>
+						</tipo_exemplar>
+						<alugado>Não</alugado>
+						<valor>2.50</valor>
+					</exemplar>
+				</exemplares>				
+			</filme>			
+		</filmes>
+	</cadastros>	
+	<emprestimos>
+		<emprestimo>
+			<codigo>00001</codigo>
+			<data>2008.10.16</data>
+			<cliente>PEDRO DA SILVA</cliente>
+			<itens>
+				<iten>
+					<exemplar>00005</exemplar>
+					<valor>4.50</valor>
+					<desconto>
+						<desconto_valor>0.50</desconto_valor>
+					</desconto>
+					<data_devolucao>2008.10.16</data_devolucao>
+					<data_prevista>2008.10.15</data_prevista>
+					<multa>4.00</multa>
+				</iten>
+				<iten>
+					<exemplar>00006</exemplar>
+					<valor>4.50</valor>
+					<desconto>
+						<desconto_valor>0.50</desconto_valor>
+					</desconto>
+					<data_devolucao>2008.10.16</data_devolucao>
+					<data_prevista>2008.10.15</data_prevista>
+					<multa>4.00</multa>
+				</iten>
+			</itens>
+		</emprestimo>
+		<emprestimo>
+			<codigo>00002</codigo>
+			<data>2008.10.12</data>
+			<cliente>ERASMO CARLOS</cliente>
+			<itens>
+				<iten>
+					<exemplar>00005</exemplar>
+					<valor>4.50</valor>
+					<desconto>
+						<porcentagem>0.50</porcentagem>
+					</desconto>
+					<data_prevista>2008.10.15</data_prevista>
+				</iten>
+				<iten>
+					<exemplar>00007</exemplar>
+					<valor>4.50</valor>
+					<desconto>
+						<desconto_valor>0.50</desconto_valor>
+					</desconto>
+					<data_devolucao>2008.10.16</data_devolucao>
+					<data_prevista>2008.10.15</data_prevista>
+					<multa>4.00</multa>
+				</iten>
+			</itens>
+		</emprestimo>
+	</emprestimos>
+</movimentos>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="vendas">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="venda" type="venda_att" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="venda_att">
+		<xs:sequence>
+			<xs:element name="data" type="xs:string"/>
+			<xs:element name="cliente" type="xs:string"/>
+			<xs:element name="vendedor" type="xs:string"/>
+			<xs:element name="total_venda" type="xs:string"/>
+			<xs:element name="vendas_itens" type="vendas_itens_att"/>
+		</xs:sequence>
+		<xs:attribute name="codigo" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="vendas_itens_att">
+		<xs:sequence>
+			<xs:element name="item" type="item_att" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="item_att">
+		<xs:sequence>
+			<xs:element name="codigo" type="xs:int"/>
+			<xs:element name="produto" type="xs:string"/>
+			<xs:element name="quantidade" type="xs:int"/>
+			<xs:element name="valor_unitario" type="xs:string"/>
+			<xs:element name="valor_total" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>	
+</xs:schema>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE vendas SYSTEM "exercicio02.dtd">
+<vendas>
+	<venda codigo="1">
+		<data>2016-03-07</data>
+		<cliente>1</cliente>
+		<vendedor>10</vendedor>
+		<total_venda>60.00</total_venda>
+		<vendas_itens>
+			<item>
+				<codigo>1</codigo>
+				<produto>10</produto>
+				<quantidade>2</quantidade>
+				<valor_unitario>10.00</valor_unitario>
+				<valor_total>20.00</valor_total>
+			</item>
+			<item>
+				<codigo>2</codigo>
+				<produto>20</produto>
+				<quantidade>2</quantidade>
+				<valor_unitario>20.00</valor_unitario>
+				<valor_total>40.00</valor_total>
+			</item>
+		</vendas_itens>
+	</venda>
+	<venda codigo="2">
+		<data>2016-03-07</data>
+		<cliente>10</cliente>
+		<vendedor>17</vendedor>
+		<total_venda>100.00</total_venda>
+		<vendas_itens>
+			<item>
+				<codigo>1</codigo>
+				<produto>20</produto>
+				<quantidade>1</quantidade>
+				<valor_unitario>100.00</valor_unitario>
+				<valor_total>100.00</valor_total>
+			</item>
+		</vendas_itens>
+	</venda>
+</vendas>

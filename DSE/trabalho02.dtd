@@ -1,0 +1,14 @@
+<!ELEMENT vendas (venda*)>
+<!ELEMENT venda (data, total, pessoas)>
+<!ELEMENT data (#PCDATA)>
+<!ELEMENT total (#PCDATA)>
+<!ELEMENT pessoas (cliente, vendedor)>
+<!ELEMENT tipo_pessoa (#PCDATA)>
+<!ELEMENT nascimento (#PCDATA)>
+<!ELEMENT cliente (telefone, nascimento, conjuge?)>
+<!ELEMENT vendedor (telefone, nascimento, conjuge?)>
+<!ELEMENT conjuge (nome, endereco, telefone)>
+<!ELEMENT nome (#PCDATA)>
+<!ELEMENT endereco (#PCDATA)>
+<!ELEMENT telefone (#PCDATA)>
+<!ATTLIST venda numero CDATA #REQUIRED>

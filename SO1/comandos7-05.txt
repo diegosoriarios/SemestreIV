@@ -1,0 +1,79 @@
+######################NO CLONADO
+
+sudo su
+nano /etc/network/interfaces
+
+----------------------------
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet static
+address 192.168.10.253
+netmask 255.255.255.0
+gateway 192.168.10.254
+----------------------------
+
+services networking restart
+
+
+apt-get install nfs-kernel-server
+
+
+#####################NO ORIGINAL
+
+source /etc/network/interfaces.d/*
+
+auto lo
+iface lo inet loopback
+
+auto eth0
+allow-hotplug eth0
+iface eth0 inet static
+
+address 192.168.10.254
+netmask 255.255.255.0
+
+######################NO CLONADO
+ping 192.168.10.254
+
+nano /etc/hosts
+
+-------------
+#ADICIONAR
+192.168.10.254 servidor
+-------------
+
+mkdir /backup
+
+nano /etc/exports
+
+------------
+/backup servidor(rw,no_root_squash,sync,no_subtree_check)
+------------
+
+exportfs -a
+#OU
+service nfs-kernel-server restart
+
+#####################NO ORIGINAL
+
+nano /etc/hosts
+------------------------
+192.168.10.253  cliente
+------------------------
+
+ping cliente
+
+cd /mnt/
+mkdir backup
+
+mount -t nfs cliente:/backup /mnt/backup
+cd backup
+rm *
+touch aulaSO.txt
+
+######################NO CLONADO

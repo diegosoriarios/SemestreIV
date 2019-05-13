@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="vendas">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="venda" type="venda_att" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="venda_att">
+		<xs:sequence>
+			<xs:element name="data" type="xs:string"/>
+			<xs:element name="total" type="xs:string"/>
+			<xs:element name="pessoas" type="pessoas_att" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="numero" type="xs:int"/>
+	</xs:complexType>
+	<xs:complexType name="pessoas_att">
+		<xs:sequence>
+			<xs:element name="cliente" type="cliente_att"/>
+			<xs:element name="vendedor" type="vendedor_att"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="cliente_att">
+		<xs:sequence>
+			<xs:element name="telefone" type="xs:string"/>
+			<xs:element name="nascimento" type="xs:string"/>
+	    	<xs:element name="conjuge" type="conjuge_att" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="vendedor_att">
+		<xs:sequence>
+			<xs:element name="telefone" type="xs:string"/>
+			<xs:element name="nascimento" type="xs:string"/>
+	    	<xs:element name="conjuge" type="conjuge_att" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="conjuge_att">
+		<xs:sequence>
+			<xs:element name="nome" type="xs:string"/>
+			<xs:element name="endereco" type="xs:string"/>		
+			<xs:element name="telefone" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,9 @@
+<!ELEMENT pessoas (pessoa+)>
+<!ELEMENT pessoa (codigo, nome, identificacao, salario)>
+<!ELEMENT codigo (#PCDATA)>
+<!ELEMENT nome (#PCDATA)>
+<!ELEMENT identificacao (cpf | rg)>
+<!ELEMENT cpf (#PCDATA)>
+<!ELEMENT rg (#PCDATA)>
+<!ELEMENT salario (#PCDATA)>
+<!ATTLIST salario moeda CDATA #REQUIRED>

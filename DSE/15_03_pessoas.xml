@@ -1,0 +1,8 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<cadastros xmlns:xs="http://www.w3.org/2001/XMLSchema-instance"
+xs:noNamespaceSchemaLocation="15_03_pessoas.xsd">
+ 	<pessoa codigo="1">
+ 		<nome></nome>
+ 		<sobrenome></sobrenome>
+ 	</pessoa>
+ </cadastros>

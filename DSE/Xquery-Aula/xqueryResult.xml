@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resultado>
+   <filme>
+      <titulo>SILENCIO DOS INOCENTES</titulo>
+      <exemplares>
+					    <exemplar>
+						      <codigo_exemplar>00005</codigo_exemplar>
+						      <tipo_exemplar>
+							        <dvd>567898</dvd>
+						      </tipo_exemplar>
+						      <alugado>Sim</alugado>
+						      <valor>2.50</valor>
+					    </exemplar>
+					    <exemplar>
+						      <codigo_exemplar>00006</codigo_exemplar>
+						      <tipo_exemplar>
+							        <dvd>567898</dvd>
+						      </tipo_exemplar>
+						      <alugado>Sim</alugado>
+						      <valor>2.50</valor>
+					    </exemplar>					
+				  </exemplares>
+   </filme>
+</resultado>

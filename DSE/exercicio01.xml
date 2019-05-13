@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pessoas SYSTEM "04_exercicio_DTD.dtd">
+<pessoas>
+    <pessoa>
+        <codigo>1</codigo>
+        <nome>Diego</nome>
+        <identificacao>
+            <cpf>02432220099</cpf>
+        </identificacao>
+        <salario moeda="R$">2643,00</salario>
+    </pessoa>
+</pessoas>
