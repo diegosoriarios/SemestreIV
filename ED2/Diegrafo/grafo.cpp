@@ -13,7 +13,7 @@ using namespace std;
 int main() {
     Grafo *g = grafoCreate(5);
     int opt = 1;
-
+    int vi, vf, peso;
     
     criaAresta(g, 1, 2, 0);
     criaAresta(g, 2, 0, 0);
@@ -29,12 +29,12 @@ int main() {
         //system("clear");
 
         cout << "0 - Sair\n"
-            << "1 - Adicionar Vertice\n"
-            << "2 - Criar aresta\n"
-            << "3 - Mostrar grafo\n"
-            << "4 - Remover vertice\n"
-            << "5 - Remover aresta\n"
-            << "6 - Buscar vertice\n";
+             << "1 - Adicionar Vertice\n"
+             << "2 - Criar aresta\n"
+             << "3 - Mostrar grafo\n"
+             << "4 - Remover vertice\n"
+             << "5 - Remover aresta\n"
+             << "6 - Buscar vertice\n";
         cout << "Selecione uma opção: ";
         cin >> opt;
         switch(opt) {
@@ -44,7 +44,6 @@ int main() {
                 g = adicionarVertice(g);
                 break;
             case 2:
-                int vi, vf, peso;
                 cout << "Selecione o vertice inicial: ";
                 cin >> vi;
                 cout << "Selecione o vertice final: ";
@@ -63,9 +62,14 @@ int main() {
                 cin >> valor;
                 g = removerVertice(g, valor);
                 break;
-            /*
             case 5:
+                cout << "Selecione o vertice inicial: ";
+                cin >> vi;
+                cout << "Selecione o vertice final: ";
+                cin >> vf;
+                //removeAresta(g, vi, vf);
                 break;
+            /*
             case 6:
                 int valor;
                 cout << "Digite o vertice a ser buscado: ";

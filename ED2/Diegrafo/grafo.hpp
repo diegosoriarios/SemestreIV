@@ -153,7 +153,17 @@ Grafo *removerVertice(Grafo *g, int valor) {
     }
 }
 
-/*int removeAresta(Grafo *g, int vi, int vf, int peso) {
+/*void removeAresta(Grafo *g, int vi, int vf) {
+    for(int i = 0; i < g->numVertice; i++) {
+        Adj* aux = g->adj[vi].cab;
+        while(aux) {
+            if(aux->vertice == vf) {
+                aux = NULL;
+                break;
+            }
+            aux = aux->prox;
+        }
+    }
     //https://stackoverflow.com/questions/48039629/c-remove-element-from-dynamic-struct-array-and-shift-other-elements
 }
 
