@@ -40,7 +40,7 @@ public class Pessoa implements Serializable {
     private String cpf;
     
     @ManyToOne
-    @JoinColumn(name="codigo_cidade", nullable = false)//renomeia a coluna e de preenchimento obrigatorio
+    @JoinColumn(name="codigo_cidade", nullable = false)//nomeia a coluna e de preenchimento obrigatorio
     private Cidade cidade;
     
     @Embedded

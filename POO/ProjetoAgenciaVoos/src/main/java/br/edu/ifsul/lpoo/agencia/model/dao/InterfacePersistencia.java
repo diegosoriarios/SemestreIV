@@ -23,4 +23,5 @@ public interface InterfacePersistencia {
     public CriteriaBuilder getCriteriaBuilder();
     public Funcionario login(String login, String senha);
     public Object find(Class c, Object id);
+    
 }

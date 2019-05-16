@@ -84,8 +84,20 @@ public class PersistenciaJPA implements InterfacePersistencia {
 
     @Override
     public Funcionario login(String login, String senha) {
-        return (Funcionario) entity.createNamedQuery("Funcionario.login").setParameter("paramLogin", login).setParameter("paramSenha", senha).getSingleResult();
-        //testar esse metodo para verificar se o getSingleResult( retorna null caso se encontre na tabela
+       
+        //invocar a NamedQuery da classe Funcionario (semelhante ao listFuncionar)
+        //passar os dois parametros
+        //executar a querie
+        //retornar o seu resultao
+        Funcionario f = (Funcionario) entity.createNamedQuery("Funcionario.login").setParameter("paramLogin", login).setParameter("paramSenha", senha).getSingleResult();
+        return f;
+        //tema de casa: testar esse método para verificar se o getSingleResult()
+        //retorna nullo caso não encontre registro na tabela.
+        
+        
+        
+        
+        
     }
 
     @Override
@@ -94,8 +106,14 @@ public class PersistenciaJPA implements InterfacePersistencia {
     }
 
     @Override
-    public Object find(Class t, Object id) {
-        //irá fazer um select com base na classe e na chave primária
+    public Object find(Class t,Object id) {
+        //irá fazer um select com base na classe e na chave primaria
         return entity.find(t, id);
     }
+
+   
+    
+    
+    
+    
 }

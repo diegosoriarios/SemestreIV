@@ -18,120 +18,98 @@ import org.junit.Test;
 
 public class TestePersistenciaJPA {
     
-    //@Test
-    public void testarPersistenciaPais() {
+    @Test
+    public void testarPersistenciaPais(){
+    
         InterfacePersistencia persistencia = PersistenciaJPA.getInstance();
         if(persistencia.conexaoAberta()){
-            Pais paisEncontrado = (Pais) persistencia.find(Pais.class, new Integer(1));
-            if(paisEncontrado == null){
-                Pais p = new Pais();
-                p.setNome("Brasil");
-                persistencia.persist(p);
-                System.out.println("Inseriu no banco de dados o pais: "+p.getCodigo());
-            } else {
-                System.out.println("Pais encontrado: " + paisEncontrado.getCodigo());
+            
+            //sequencia do teste
+            //utilizando o find, encontre o registro
+            //caso não exista, insira.
+            Pais p = (Pais) persistencia.find(Pais.class, new Integer(1));
+            if(p == null){
+                p = new Pais();
+                p.setNome("Argentina");
+                persistencia.persist(p);//inserir um país
+            }else{
+                System.out.println("Pais cadastrado : "+p.getCodigo());
             }
             persistencia.fecharConexao();
         }
     }
     
-    //@Test
-    public void testarPersistenciaEstado() {
+    @Test
+    public void testarPersistenciaEstado(){
         InterfacePersistencia persistencia = PersistenciaJPA.getInstance();
-        if(persistencia.conexaoAberta()){
-            Estado estadoEncontrado = (Estado) persistencia.find(Estado.class, new Integer(1));
-            if(estadoEncontrado == null){
-                Estado est = new Estado();
+        if(persistencia.conexaoAberta()){            
+            //sequencia do teste
+            //find para localizar o pais
+            //find, para localizar o estado, caso nao exista, inserir
+            //caso ele exista, apenas mostrar
+            Estado est = (Estado) persistencia.find(Estado.class, new Integer(1));
+            if(est == null){
+                est = new Estado();
                 est.setNome("Rio Grande do Sul");
                 est.setUf("RS");
                 est.setPais((Pais) persistencia.find(Pais.class, new Integer(1)));
                 persistencia.persist(est);
-                System.out.println("Inseriu no banco de dados o estado: " + est.getCodigo());
-            }else{
-                System.out.println("Estado encontrado: " + estadoEncontrado.getCodigo());
             }
             persistencia.fecharConexao();
         }
     }
-    
-    //@Test
+    @Test
     public void testarPersistenciaCidade(){
-        InterfacePersistencia persistencia = PersistenciaJPA.getInstance();
-        if(persistencia.conexaoAberta()){
-            Cidade cidadeEncontrada = (Cidade) persistencia.find(Cidade.class, new Integer(1));
-            if(cidadeEncontrada == null){
-                Cidade cid = new Cidade();
-                cid.setNome("Quarai");
-                cid.setEstado((Estado) persistencia.find(Estado.class, new Integer(5)));
-                persistencia.persist(cid);
-                System.out.println("Inseriu no banco de dados a cidade: " + cid.getCodigo());
-            }else{
-                System.out.println("Encontrou a cidade: " + cidadeEncontrada.getNome());
-            }
-            persistencia.fecharConexao();
-        }
-    }
-    
-    //@Test
-    public void testarPersistenciaFuncionario(){
         
+            Cidade cid = new Cidade();
+            cid.setNome("Passo Fundo");
+            //cid.setEstado(est);
+    }
+
+    @Test
+    public void testarPersistenciaFuncionario(){
         System.out.println("Executando teste na classe TestePersistenciaJPA -> testarPersistenciaFuncionario");
         InterfacePersistencia persistencia = PersistenciaJPA.getInstance();
         if(persistencia.conexaoAberta()){
-            System.out.println("Abriu a conexao JPA");
-            
-            Endereco end = new Endereco();
-            end.setCep("99010060");
-            
-            Funcionario func = new Funcionario();
-            func.setNome("Diego");
-            func.setEndereco(end);
-            func.setCidade((Cidade) persistencia.find(Cidade.class, new Integer(5)));
-            func.setLogin("diego");
-            func.setMatricula("20172");
-            func.setSenha("1234");
-            persistencia.persist(func);
-            
-            //remove fisicamente do banco de dados
-            //persistencia.remove(p);
-           //p deixa de ser gerenciado pelo JPA 
-          
+            System.out.println("Abriu a conexao JPA");            
+           /* tema de casa para 21/03
+           Listar os funcionarios
+           Se a lista estiver vazia, inserir um registro
+           Se a lista tiver objetos, mostrar, editar e depois remover           
+           */
            //chamar o método listFuncionario da classe PersistenciaJPA
            //atribuir o retorno para um lista de funcionario
            //imprimir na saida os objetos retornados
-            List<Funcionario> lista = persistencia.listFuncionario();
-            if(lista.isEmpty()){
-                Funcionario addFunc = new Funcionario();
-                addFunc.setNome("Eu");
-                addFunc.setEndereco(end);
-                addFunc.setCidade((Cidade) persistencia.find(Cidade.class, new Integer(1)));
-                addFunc.setLogin("eu");
-                addFunc.setMatricula("20172");
-                addFunc.setSenha("1234");
-                persistencia.persist(addFunc);
-            }else{
-                for(Funcionario f: lista){
-                    System.out.println("Funcionario: " + f.getCodigo());
-                }
+           List<Funcionario> list = persistencia.listFuncionario();
+           if(list.isEmpty()){
+                //
+                Endereco end = new Endereco();
+                end.setCep("99010010");
+                Funcionario func = new Funcionario();
+                //...
+                persistencia.persist(func);               
+           }else{
+            for(Funcionario f : list){
+                System.out.println("funcionario listado: "+f.getCodigo()+" - "+f.getNome());
+                //alterar
+                //remover
             }
-            
+           }
+          
             Funcionario funcionarioEncontrado = (Funcionario) persistencia.find(Funcionario.class, new Integer(1));
             
             if(funcionarioEncontrado != null){
-                System.out.println("Funcionario encontrado: " + funcionarioEncontrado.getNome());
+                System.out.println("Funcionario encontrado pelo find: "+funcionarioEncontrado.getNome());
+            }else{
+                System.out.println("Nao encontrou o funcionario 1");
             }
+         
            
             persistencia.fecharConexao();
             System.out.println("Fechou a conexao !!");
         }else{
             System.out.println("Nao abriu a conexao");
         }
-        
-        
-        //Listar Funcionario
-        //Se a lista estiver vazia - inserir
-        //Se a lista não estiver vazia - listar
-        //Apos a impressão de cada objeto - remover
     }
     
 }
