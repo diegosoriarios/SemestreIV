@@ -15,11 +15,12 @@ int main() {
     int opt = 1;
     int vi, vf, peso;
     
-    criaAresta(g, 1, 2, 0);
-    criaAresta(g, 2, 0, 0);
-    criaAresta(g, 3, 4, 0);
-    criaAresta(g, 4, 1, 0);
-    criaAresta(g, 5, 3, 0);
+    criaAresta(g, 0, 2, 0);
+    criaAresta(g, 1, 0, 0);
+    criaAresta(g, 2, 4, 0);
+    criaAresta(g, 3, 1, 0);
+    criaAresta(g, 4, 3, 0);
+    criaAresta(g, 3, 3, 0);
     criaAresta(g, 3, 2, 0);
     /*mostraGrafo(g);
     */
@@ -81,7 +82,7 @@ int main() {
                     //TODO - Verificar se vertice possui aresta ou não
                     cout << "Selecione o vertice final: ";
                     cin >> vf;
-                    //removeAresta(g, vi, vf);
+                    removeAresta(g, vi, vf);
                 } else {
                     cout << "Grafo está vazio, adicione um vertice\n";
                 }
