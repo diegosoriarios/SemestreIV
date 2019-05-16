@@ -34,8 +34,7 @@ int main() {
              << "2 - Criar aresta\n"
              << "3 - Mostrar grafo\n"
              << "4 - Remover vertice\n"
-             << "5 - Remover aresta\n"
-             << "6 - Buscar vertice\n";
+             << "5 - Remover aresta\n";
         cout << "Selecione uma opção: ";
         cin >> opt;
         switch(opt) {
@@ -87,23 +86,6 @@ int main() {
                     cout << "Grafo está vazio, adicione um vertice\n";
                 }
                 break;
-            /*
-            case 6:
-                if(g->numVertice > 0) {
-                    int valor;
-                    cout << "Digite o vertice a ser buscado: ";
-                    cin >> valor;
-                    //int busca = profundidade(g, valor);
-                    Vertice busca = encontraVertice(g, valor);
-                    if(busca.dado != NULL) {
-                        cout << "\nValor " << busca.dado << " encontrado\n";
-                    } else {
-                        cout << "\nValor não encontrado\n";
-                    }
-                } else {
-
-                }
-            */
         }
     }
 }

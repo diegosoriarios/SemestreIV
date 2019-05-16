@@ -154,7 +154,7 @@ Grafo *removerVertice(Grafo *g, int valor) {
 }
 
 Adj* buscaRecursiva(Adj *aresta, int valor){
-    if (!aresta) { // se n�o tiver mais elementos
+    if (!aresta) {
         return NULL;
     }else if (aresta->vertice == valor){
         return aresta;
