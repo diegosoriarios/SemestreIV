@@ -153,6 +153,49 @@ Grafo *removerVertice(Grafo *g, int valor) {
     }
 }
 
+/*
+void dfs(int v) {
+    stack<int> pilha;
+	bool visitados[V]; // vetor de visitados
+ 
+	// marca todos como não visitados
+	for(int i = 0; i < V; i++)
+		visitados[i] = false;
+ 
+	while(true) {
+		if(!visitados[v]) {
+			cout << "Visitando vertice " << v << " ...\n";
+			visitados[v] = true; // marca como visitado
+			pilha.push(v); // insere "v" na pilha
+		}
+ 
+		bool achou = false;
+		list<int>::iterator it;
+ 
+		// busca por um vizinho não visitado
+		for(it = adj[v].begin(); it != adj[v].end(); it++) {
+			if(!visitados[*it]) {
+				achou = true;
+				break;
+			}
+		}
+ 
+		if(achou)
+			v = *it; // atualiza o "v"
+		else {
+			// se todos os vizinhos estão visitados ou não existem vizinhos
+			// remove da pilha
+			pilha.pop();
+			// se a pilha ficar vazia, então terminou a busca
+			if(pilha.empty())
+				break;
+			// se chegou aqui, é porque pode pegar elemento do topo
+			v = pilha.top();
+		}
+    }
+}
+*/
+
 /*void removeAresta(Grafo *g, int vi, int vf) {
     for(int i = 0; i < g->numVertice; i++) {
         Adj* aux = g->adj[vi].cab;

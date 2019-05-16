@@ -44,42 +44,63 @@ int main() {
                 g = adicionarVertice(g);
                 break;
             case 2:
-                cout << "Selecione o vertice inicial: ";
-                cin >> vi;
-                cout << "Selecione o vertice final: ";
-                cin >> vf;
-                cout << "Digite o peso da aresta ";
-                cout << "(0 se caso a aresta não seja ponderada): ";
-                cin >> peso;
-                criaAresta(g, vi, vf, peso);
+                if(g->numVertice > 0) {
+                    cout << "Selecione o vertice inicial: ";
+                    cin >> vi;
+                    cout << "Selecione o vertice final: ";
+                    cin >> vf;
+                    cout << "Digite o peso da aresta ";
+                    cout << "(0 se caso a aresta não seja ponderada): ";
+                    cin >> peso;
+                    criaAresta(g, vi, vf, peso);
+                } else {
+                    cout << "Adicione um vertice primeiro\n";
+                }                
                 break;
             case 3:
-                mostraGrafo(g);
+                if(g->numVertice > 0) {
+                    mostraGrafo(g);
+                } else {
+                    cout << "Grafo está vazio, adicione um vertice\n";
+                }
                 break;
             case 4:
-                int valor;
-                cout << "Digite o vertice a ser removido: ";
-                cin >> valor;
-                g = removerVertice(g, valor);
+                if(g->numVertice > 0) {
+                    int valor;
+                    cout << "Digite o vertice a ser removido: ";
+                    cin >> valor;
+                    g = removerVertice(g, valor);
+                } else {
+                    cout << "Grafo está vazio, adicione um vertice\n";
+                }
                 break;
             case 5:
-                cout << "Selecione o vertice inicial: ";
-                cin >> vi;
-                cout << "Selecione o vertice final: ";
-                cin >> vf;
-                //removeAresta(g, vi, vf);
+                if(g->numVertice > 0) {
+                    cout << "Selecione o vertice inicial: ";
+                    cin >> vi;
+                    //TODO - Verificar se vertice possui aresta ou não
+                    cout << "Selecione o vertice final: ";
+                    cin >> vf;
+                    //removeAresta(g, vi, vf);
+                } else {
+                    cout << "Grafo está vazio, adicione um vertice\n";
+                }
                 break;
             /*
             case 6:
-                int valor;
-                cout << "Digite o vertice a ser buscado: ";
-                cin >> valor;
-                //int busca = profundidade(g, valor);
-                Vertice busca = encontraVertice(g, valor);
-                if(busca.dado != NULL) {
-                    cout << "\nValor " << busca.dado << " encontrado\n";
+                if(g->numVertice > 0) {
+                    int valor;
+                    cout << "Digite o vertice a ser buscado: ";
+                    cin >> valor;
+                    //int busca = profundidade(g, valor);
+                    Vertice busca = encontraVertice(g, valor);
+                    if(busca.dado != NULL) {
+                        cout << "\nValor " << busca.dado << " encontrado\n";
+                    } else {
+                        cout << "\nValor não encontrado\n";
+                    }
                 } else {
-                    cout << "\nValor não encontrado\n";
+
                 }
             */
         }
