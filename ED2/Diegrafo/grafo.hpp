@@ -80,7 +80,7 @@ void mostraGrafo(Grafo *g) {
 int visita(Grafo *g, int i, int *cor, int key) {
     cor[i] = 1;
     int flag;
-    
+
     Adj *v = g->adj[i].cab;
     /*
     if(g->adj[i].cab) {
@@ -125,11 +125,12 @@ Grafo *adicionarVertice(Grafo *g) {
     g->adj = (Vertice*)realloc(g->adj, novoTamanho * sizeof(Vertice));
     g->numVertice = novoTamanho;
     g->adj[novoTamanho-1].dado = novoTamanho;
+    g->adj[novoTamanho-1].cab = NULL;
     return g;
-    
+
 }
 
-Grafo *removerVertice(Grafo *g, int valor) {
+void removerVertice(Grafo *g, int valor) {
     if(g->adj[valor].cab == NULL) {
         int novoTamanho = g->numVertice - 1;
         Vertice *aux = (Vertice*)malloc(sizeof(Vertice)*novoTamanho);
@@ -145,11 +146,9 @@ Grafo *removerVertice(Grafo *g, int valor) {
         }
         g->adj = aux;
         g->numVertice = novoTamanho;
-        free(aux);
-        return g;   
+        //free(aux);
     } else {
         cout << "Precisa remover as arestas\n";
-        return g;
     }
 }
 
@@ -165,6 +164,7 @@ Adj* buscaRecursiva(Adj *aresta, int valor){
 
 void removeAresta(Grafo *g, int vi, int vf) {
     Adj* aux = g->adj[vi].cab;
+    Adj *add = aux;
     int i = 0;
     cout << aux << "\t";
     while(aux) {
@@ -176,10 +176,11 @@ void removeAresta(Grafo *g, int vi, int vf) {
         cout << aux << "\t";
     }
     cout << "\n";
-    aux = aux + i;
+    aux = add;
     int tam = i-1;
     int vertices[tam], peso[tam];
     i = 0;
+    cout << "Asdas" << aux << "\t";
     while(aux){
         if(aux->vertice != vf) {
             vertices[i] = aux->vertice;
@@ -188,11 +189,12 @@ void removeAresta(Grafo *g, int vi, int vf) {
         }
         g->numArestas--;
         aux = aux->prox;
+        cout << i;
     }
     g->adj[vi].cab = NULL;
     for(i = 0; i < tam; i++) {
         criaAresta(g, vi, vertices[i], peso[i]);
-    }    
+    }
 }
 
 //LINUX
