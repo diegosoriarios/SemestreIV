@@ -11,6 +11,7 @@ using namespace std;
 #include "grafo.hpp"
 
 int main() {
+    setlocale(LC_ALL,"Portuguese");
     Grafo *g = grafoCreate(5);
     int opt = 1;
     int vi, vf, peso;
@@ -48,7 +49,14 @@ int main() {
                     cout << "Digite o peso da aresta ";
                     cout << "(0 se caso a aresta não seja ponderada): ";
                     cin >> peso;
+                    //grafo
                     criaAresta(g, vi, vf, peso);
+                    criaAresta(g, vf, vi, peso);
+                    g->numArestas--;
+                    /*
+                    Se for digrafo
+                    criaAresta(g, vi, vf, peso);
+                    */
                 } else {
                     cout << "Adicione um vertice primeiro\n";
                 }
@@ -76,7 +84,14 @@ int main() {
                     cin >> vi;
                     cout << "Selecione o vertice final: ";
                     cin >> vf;
+                    //grafo
                     removeAresta(g, vi, vf);
+                    removeAresta(g, vf, vi);
+                    g->numArestas++;
+                    /*
+                    Se for digrafo
+                    removeAresta(g, vi, vf);
+                    */
                 } else {
                     cout << "Grafo está vazio, adicione um vertice\n";
                 }
