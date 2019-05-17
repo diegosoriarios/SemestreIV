@@ -26,8 +26,6 @@ int main() {
     */
 
     while(opt != 0) {
-        //UNIX
-        //system("clear");
 
         cout << "0 - Sair\n"
              << "1 - Adicionar Vertice\n"
@@ -75,10 +73,9 @@ int main() {
                 }
                 break;
             case 5:
-                if(g->numVertice > 0) {
+                if(g->numVertice > 0 || g->numArestas > 0) {
                     cout << "Selecione o vertice inicial: ";
                     cin >> vi;
-                    //TODO - Verificar se vertice possui aresta ou não
                     cout << "Selecione o vertice final: ";
                     cin >> vf;
                     removeAresta(g, vi, vf);
