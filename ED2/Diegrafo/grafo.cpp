@@ -15,26 +15,24 @@ int main() {
     int opt = 1;
     int vi, vf, peso;
     
-    criaAresta(g, 1, 2, 0);
-    criaAresta(g, 2, 0, 0);
-    criaAresta(g, 3, 4, 0);
-    criaAresta(g, 4, 1, 0);
-    criaAresta(g, 5, 3, 0);
+    criaAresta(g, 0, 2, 0);
+    criaAresta(g, 1, 0, 0);
+    criaAresta(g, 2, 4, 0);
+    criaAresta(g, 3, 1, 0);
+    criaAresta(g, 4, 3, 0);
+    criaAresta(g, 3, 3, 0);
     criaAresta(g, 3, 2, 0);
     /*mostraGrafo(g);
     */
 
     while(opt != 0) {
-        //UNIX
-        //system("clear");
 
         cout << "0 - Sair\n"
              << "1 - Adicionar Vertice\n"
              << "2 - Criar aresta\n"
              << "3 - Mostrar grafo\n"
              << "4 - Remover vertice\n"
-             << "5 - Remover aresta\n"
-             << "6 - Buscar vertice\n";
+             << "5 - Remover aresta\n";
         cout << "Selecione uma opção: ";
         cin >> opt;
         switch(opt) {
@@ -75,34 +73,16 @@ int main() {
                 }
                 break;
             case 5:
-                if(g->numVertice > 0) {
+                if(g->numVertice > 0 || g->numArestas > 0) {
                     cout << "Selecione o vertice inicial: ";
                     cin >> vi;
-                    //TODO - Verificar se vertice possui aresta ou não
                     cout << "Selecione o vertice final: ";
                     cin >> vf;
-                    //removeAresta(g, vi, vf);
+                    removeAresta(g, vi, vf);
                 } else {
                     cout << "Grafo está vazio, adicione um vertice\n";
                 }
                 break;
-            /*
-            case 6:
-                if(g->numVertice > 0) {
-                    int valor;
-                    cout << "Digite o vertice a ser buscado: ";
-                    cin >> valor;
-                    //int busca = profundidade(g, valor);
-                    Vertice busca = encontraVertice(g, valor);
-                    if(busca.dado != NULL) {
-                        cout << "\nValor " << busca.dado << " encontrado\n";
-                    } else {
-                        cout << "\nValor não encontrado\n";
-                    }
-                } else {
-
-                }
-            */
         }
     }
 }

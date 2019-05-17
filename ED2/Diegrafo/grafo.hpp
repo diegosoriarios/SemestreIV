@@ -153,74 +153,47 @@ Grafo *removerVertice(Grafo *g, int valor) {
     }
 }
 
-/*
-void dfs(int v) {
-    stack<int> pilha;
-	bool visitados[V]; // vetor de visitados
- 
-	// marca todos como não visitados
-	for(int i = 0; i < V; i++)
-		visitados[i] = false;
- 
-	while(true) {
-		if(!visitados[v]) {
-			cout << "Visitando vertice " << v << " ...\n";
-			visitados[v] = true; // marca como visitado
-			pilha.push(v); // insere "v" na pilha
-		}
- 
-		bool achou = false;
-		list<int>::iterator it;
- 
-		// busca por um vizinho não visitado
-		for(it = adj[v].begin(); it != adj[v].end(); it++) {
-			if(!visitados[*it]) {
-				achou = true;
-				break;
-			}
-		}
- 
-		if(achou)
-			v = *it; // atualiza o "v"
-		else {
-			// se todos os vizinhos estão visitados ou não existem vizinhos
-			// remove da pilha
-			pilha.pop();
-			// se a pilha ficar vazia, então terminou a busca
-			if(pilha.empty())
-				break;
-			// se chegou aqui, é porque pode pegar elemento do topo
-			v = pilha.top();
-		}
+Adj* buscaRecursiva(Adj *aresta, int valor){
+    if (!aresta) {
+        return NULL;
+    }else if (aresta->vertice == valor){
+        return aresta;
+    }else{
+        return buscaRecursiva(aresta->prox, valor);
     }
-}
-*/
-
-/*void removeAresta(Grafo *g, int vi, int vf) {
-    for(int i = 0; i < g->numVertice; i++) {
-        Adj* aux = g->adj[vi].cab;
-        while(aux) {
-            if(aux->vertice == vf) {
-                aux = NULL;
-                break;
-            }
-            aux = aux->prox;
-        }
-    }
-    //https://stackoverflow.com/questions/48039629/c-remove-element-from-dynamic-struct-array-and-shift-other-elements
 }
 
-Vertice encontraVertice(Grafo *g, int key) {
-    Grafo *novo = g;
-    for(int i = 0; i < g->numVertice; i++) {
-        if(novo->adj[i].dado == key) {
-            return novo->adj[i];
+void removeAresta(Grafo *g, int vi, int vf) {
+    Adj* aux = g->adj[vi].cab;
+    int i = 0;
+    cout << aux << "\t";
+    while(aux) {
+        i++;
+        if(aux->prox == NULL){
+            break;
         }
+        aux = aux->prox;
+        cout << aux << "\t";
     }
-    Vertice x = NULL;
-    return x;
+    cout << "\n";
+    aux = aux + i;
+    int tam = i-1;
+    int vertices[tam], peso[tam];
+    i = 0;
+    while(aux){
+        if(aux->vertice != vf) {
+            vertices[i] = aux->vertice;
+            peso[i] = aux->peso;
+            i++;
+        }
+        g->numArestas--;
+        aux = aux->prox;
+    }
+    g->adj[vi].cab = NULL;
+    for(i = 0; i < tam; i++) {
+        criaAresta(g, vi, vertices[i], peso[i]);
+    }    
 }
-*/
 
 //LINUX
 //g++ grafo.cpp -o grafo && ./grafo
