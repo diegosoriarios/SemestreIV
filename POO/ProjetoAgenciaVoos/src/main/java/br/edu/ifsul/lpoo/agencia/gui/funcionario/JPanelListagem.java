@@ -12,6 +12,7 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,6 +37,8 @@ public class JPanelListagem extends JPanel implements ActionListener {
     private JButton btnEditar;
     private JButton btnExcluir;
     
+    private List<Funcionario> listFuncionario;
+    
     public JPanelListagem(JPanelFuncionario f){
             this.f = f;
             initComponents();
@@ -45,10 +48,16 @@ public class JPanelListagem extends JPanel implements ActionListener {
     public void populaListagem() {
         modeloTabela.setNumRows(0);
         
-        List<Funcionario> list = f.getControle().getPersistencia().listFuncionario();
+        listFuncionario = f.getControle().getPersistencia().listFuncionario();
         
-        for(Funcionario f: list) {
-            modeloTabela.addRow(new Object[]{f.getCodigo(), f.getNome(), f.getLogin(), f.getCidade().getNome()});
+        if(listFuncionario != null){
+            if(!listFuncionario.isEmpty()){
+                for(Funcionario f: listFuncionario) {
+                    modeloTabela.addRow(new Object[]{f.getCodigo(), f.getNome(), f.getLogin(), f.getCidade().getNome()});
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Erro ao importar funcionarios", "Erro", JOptionPane.ERROR_MESSAGE);
         }
     }
     
@@ -69,7 +78,7 @@ public class JPanelListagem extends JPanel implements ActionListener {
         
         pnlCentro = new JPanel();
         scpPane = new JScrollPane();        
-        modeloTabela = new DefaultTableModel(new Object[] {"Código","Nome","Login", "Cidade"},0);
+        modeloTabela = new DefaultTableModel(new Object[] {"Código","Nome","Login", "Cidade"},0);        
         tblListagem = new JTable(modeloTabela);
         scpPane.setViewportView(tblListagem);
         pnlCentro.add(scpPane); //provisório: scpPanel adicionado como flow
@@ -96,9 +105,25 @@ public class JPanelListagem extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        
         if(e.getActionCommand().equals(btnNovo.getActionCommand())){
+            f.getEdicao().setFuncionario(null);
             f.mostraCarta("edicao");
         } else if (e.getActionCommand().equals(btnEditar.getActionCommand())){
-            f.mostraCarta("edicao");
+            //verificar se o usuário selecionou uma linha
+            //recuperar o codigo do funcionario selecionado
+            int linhaSel = tblListagem.getSelectedRow();
+            if(linhaSel > -1) {
+                int codFunc = new Integer(modeloTabela.getValueAt(linhaSel, 0).toString());
+                
+                for(Funcionario func: listFuncionario){
+                    if(func.getCodigo().intValue() == codFunc) {
+                        f.getEdicao().setFuncionario(func);
+                        f.mostraCarta("edicao");
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione linha para editar", "Selecione", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }

@@ -43,4 +43,7 @@ public class JPanelFuncionario extends JPanel {
     public Controle getControle() {
         return controle;
     }
+    public JPanelEdicao getEdicao() {
+        return edicao;
+    }
 }

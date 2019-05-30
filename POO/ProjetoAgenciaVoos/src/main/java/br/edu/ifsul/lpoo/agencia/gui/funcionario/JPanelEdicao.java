@@ -4,6 +4,7 @@
 package br.edu.ifsul.lpoo.agencia.gui.funcionario;
 
 import br.edu.ifsul.lpoo.agencia.model.Cidade;
+import br.edu.ifsul.lpoo.agencia.model.Funcionario;
 import java.awt.BorderLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -12,6 +13,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -48,6 +50,22 @@ public class JPanelEdicao extends JPanel implements ActionListener {
         initComponents();
     }
     
+    public void setFuncionario(Funcionario f) {
+        if(f != null){
+            txfCodigo.setText(f.getCodigo().toString());
+            txfNome.setText(f.getNome());
+            txfLogin.setText(f.getLogin());
+            psfSenha.setText(f.getSenha());
+            cbxCidade.setSelectedItem(f.getCidade());
+        } else {
+            txfCodigo.setText("");
+            txfNome.setText("");
+            txfLogin.setText("");
+            psfSenha.setText("");
+            cbxCidade.setSelectedItem("");
+        }
+    }
+    
     private void initComponents(){
         
         border = new BorderLayout();
@@ -63,6 +81,7 @@ public class JPanelEdicao extends JPanel implements ActionListener {
         pnlCentro.add(lblCodigo, gbc);
         
         txfCodigo = new JTextField(20);
+        txfCodigo.setEditable(false);
         gbc = new GridBagConstraints();
         gbc.gridy = 0;//linha
         gbc.gridx = 1;//coluna
@@ -135,10 +154,27 @@ public class JPanelEdicao extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
        
         if(e.getActionCommand().equals(btnSalvar.getActionCommand())){
+            //Passo 1: validar o formulário
+            String codigo= txfCodigo.getText().trim();
+            String nome = txfNome.getText().trim();
+            String login = txfLogin.getText().trim();
+            String senha = new String(psfSenha.getPassword()).trim();
+            Integer indCid = cbxCidade.getSelectedIndex();
+            //Passo 2: validar a acao
+            if(nome.length() > 0 && login.length() > 0 && senha.length() > 0 && indCid > 0) {
+                if(codigo.equals("")) {
+                    //Passo 3: persistir                    
+                    //insert
+                } else {
+                    //Passo 3: persistir
+                    //update
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Preencha os valores", "", JOptionPane.INFORMATION_MESSAGE);
+            }
             f.mostraCarta("listagem");
         } else if(e.getActionCommand().equals(btnCancelar.getActionCommand())) {
             f.mostraCarta("listagem");
         }
-        
     }
 }
