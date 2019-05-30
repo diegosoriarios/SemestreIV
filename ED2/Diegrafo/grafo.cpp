@@ -11,10 +11,11 @@ using namespace std;
 #include "grafo.hpp"
 
 int main() {
+    setlocale(LC_ALL,"Portuguese");
     Grafo *g = grafoCreate(5);
     int opt = 1;
     int vi, vf, peso;
-    
+
     criaAresta(g, 0, 2, 0);
     criaAresta(g, 1, 0, 0);
     criaAresta(g, 2, 4, 0);
@@ -22,8 +23,6 @@ int main() {
     criaAresta(g, 4, 3, 0);
     criaAresta(g, 3, 3, 0);
     criaAresta(g, 3, 2, 0);
-    /*mostraGrafo(g);
-    */
 
     while(opt != 0) {
 
@@ -50,10 +49,17 @@ int main() {
                     cout << "Digite o peso da aresta ";
                     cout << "(0 se caso a aresta não seja ponderada): ";
                     cin >> peso;
+                    //grafo
                     criaAresta(g, vi, vf, peso);
+                    criaAresta(g, vf, vi, peso);
+                    g->numArestas--;
+                    /*
+                    Se for digrafo
+                    criaAresta(g, vi, vf, peso);
+                    */
                 } else {
                     cout << "Adicione um vertice primeiro\n";
-                }                
+                }
                 break;
             case 3:
                 if(g->numVertice > 0) {
@@ -67,7 +73,7 @@ int main() {
                     int valor;
                     cout << "Digite o vertice a ser removido: ";
                     cin >> valor;
-                    g = removerVertice(g, valor);
+                    removerVertice(g, valor);
                 } else {
                     cout << "Grafo está vazio, adicione um vertice\n";
                 }
@@ -78,7 +84,14 @@ int main() {
                     cin >> vi;
                     cout << "Selecione o vertice final: ";
                     cin >> vf;
+                    //grafo
                     removeAresta(g, vi, vf);
+                    removeAresta(g, vf, vi);
+                    g->numArestas++;
+                    /*
+                    Se for digrafo
+                    removeAresta(g, vi, vf);
+                    */
                 } else {
                     cout << "Grafo está vazio, adicione um vertice\n";
                 }

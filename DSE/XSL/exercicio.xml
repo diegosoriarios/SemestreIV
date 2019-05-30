@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="exercicio.xsl"?>
+  <cadastros>
+    <produtos>
+      <produto>
+        <codigo>1</codigo>
+        <nome>MOUSE</nome>
+        <unidade>UN</unidade>
+        <preco>20.00</preco>
+        <promocao>S</promocao>
+      </produto>
+      <produto>
+        <codigo>2</codigo>
+        <nome>TECLADO</nome>
+        <unidade>UN</unidade>
+        <preco>20.00</preco>
+        <promocao>N</promocao>
+      </produto>
+  </produtos>
+</cadastros>
