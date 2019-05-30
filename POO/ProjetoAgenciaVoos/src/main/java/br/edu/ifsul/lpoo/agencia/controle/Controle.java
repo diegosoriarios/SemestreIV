@@ -1,11 +1,10 @@
-/*
- * 
- */
+
 package br.edu.ifsul.lpoo.agencia.controle;
 
 import br.edu.ifsul.lpoo.agencia.gui.JFramePrincipal;
 import br.edu.ifsul.lpoo.agencia.gui.JMenuBarPrincipal;
 import br.edu.ifsul.lpoo.agencia.gui.JPanelHome;
+import br.edu.ifsul.lpoo.agencia.gui.funcionario.JPanelFuncionario;
 import br.edu.ifsul.lpoo.agencia.gui.login.JPanelLogin;
 import br.edu.ifsul.lpoo.agencia.model.Funcionario;
 import br.edu.ifsul.lpoo.agencia.model.dao.InterfacePersistencia;
@@ -24,6 +23,7 @@ public class Controle {
     private JPanelLogin telaLogin;
     private JPanelHome telaHome;
     private JMenuBarPrincipal menu;
+    private JPanelFuncionario funcionario;
     
     
     public Controle(){        
@@ -51,36 +51,45 @@ public class Controle {
             telaLogin = new JPanelLogin(this);
             telaHome = new JPanelHome(this);
             menu = new JMenuBarPrincipal(this);
+            funcionario = new JPanelFuncionario(this);
             
             frame.adicionaCarta(telaLogin, "tela_login");
             frame.adicionaCarta(new JPanel(), "tela_white");
-            frame.adicionaCarta(telaHome, "tela_home");
-            
-            frame.mostraCarta("tela_white");
+            frame.adicionaCarta(telaHome, "tela_home");            
+            frame.adicionaCarta(funcionario, "tela_funcionario");
+            frame.mostraCarta("tela_home");
+            //antes de tornar visivel o frame, todas as cartas deverão estar adicionadas
             frame.setVisible(true);
+            
             if(persistencia.conexaoAberta()){
                 JOptionPane.showMessageDialog(frame, "Conectou com Sucesso em "+PersistenciaJDBC.URL, "Conexão", JOptionPane.INFORMATION_MESSAGE);
+                
                 frame.mostraCarta("tela_login");
 
             }else{
                 JOptionPane.showMessageDialog(frame, "Erro ao conectar em "+PersistenciaJDBC.URL, "Conexão", JOptionPane.ERROR_MESSAGE);
             }
-        
-        }catch(Exception e){
             
+        }catch(Exception e){
+            e.printStackTrace();
             JOptionPane.showMessageDialog(frame, "Erro ao conectar em "+PersistenciaJDBC.URL+" : "+e.getLocalizedMessage(), "Conexão", JOptionPane.ERROR_MESSAGE);
-        }        
+        }
+        
     }
     
-    public void mostraCarta(String page) {
-        if(page.equals("tela_home")){
-            frame.setJMenuBar(menu);
+    public void mostraCarta(String nome){
+        if(nome.equals("tela_home")){
+            frame.setJMenuBar(menu);            
         }
-        frame.mostraCarta(page);
+        frame.mostraCarta(nome);//o famoso by-pass
     }
     
     public void fecharConexao(){
         persistencia.fecharConexao();
+    }
+    
+    public InterfacePersistencia getPersistencia() {
+        return persistencia;
     }
     
 }

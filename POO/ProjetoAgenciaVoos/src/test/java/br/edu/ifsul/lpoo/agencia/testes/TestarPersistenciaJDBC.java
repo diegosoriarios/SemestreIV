@@ -22,7 +22,7 @@ import org.junit.Test;
 public class TestarPersistenciaJDBC {
     
     //@Test
-    public void testarPersistenciaPais() {
+    public void testarPersistenciaPais() throws Exception {
         InterfacePersistencia persistencia = PersistenciaJDBC.getInstance();
         if(persistencia.conexaoAberta()){
             Pais p = new Pais();
@@ -34,7 +34,7 @@ public class TestarPersistenciaJDBC {
     }
     
     //@Test
-    public void testarPersistenciaEstado() {
+    public void testarPersistenciaEstado() throws Exception {
         InterfacePersistencia persistencia = PersistenciaJDBC.getInstance();
         if(persistencia.conexaoAberta()){
             Estado est = new Estado();
@@ -49,7 +49,7 @@ public class TestarPersistenciaJDBC {
     }
     
     //@Test
-    public void testarPersistenciaCidade(){
+    public void testarPersistenciaCidade() throws Exception{
         InterfacePersistencia persistencia = PersistenciaJDBC.getInstance();
         if(persistencia.conexaoAberta()){
             Cidade cid = new Cidade();
@@ -64,7 +64,7 @@ public class TestarPersistenciaJDBC {
     }
     
     @Test
-    public void testarPersistenciaFuncionario(){
+    public void testarPersistenciaFuncionario() throws Exception{
         InterfacePersistencia persistencia = PersistenciaJDBC.getInstance();
         if(persistencia.conexaoAberta()){
             System.out.println("Conexão Aberta");

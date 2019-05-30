@@ -34,6 +34,11 @@ public class Cidade implements Serializable{
         
     }
 
+    public Cidade(Integer codigo){
+        
+        this.codigo = codigo;
+    }
+    
     public Integer getCodigo() {
         return codigo;
     }

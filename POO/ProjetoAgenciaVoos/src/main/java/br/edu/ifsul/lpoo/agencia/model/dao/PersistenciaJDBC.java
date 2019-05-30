@@ -5,11 +5,13 @@ import br.edu.ifsul.lpoo.agencia.model.Cidade;
 import br.edu.ifsul.lpoo.agencia.model.Estado;
 import br.edu.ifsul.lpoo.agencia.model.Funcionario;
 import br.edu.ifsul.lpoo.agencia.model.Pais;
+import br.edu.ifsul.lpoo.agencia.model.Reserva;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.criteria.CriteriaBuilder;
 
@@ -39,6 +41,7 @@ public class PersistenciaJDBC implements InterfacePersistencia{
         if(persistencia == null)
             persistencia = new PersistenciaJDBC();        
         return persistencia;
+       
     }
     
     @Override
@@ -59,10 +62,7 @@ public class PersistenciaJDBC implements InterfacePersistencia{
         }       
     }
 
-    @Override
-    public CriteriaBuilder getCriteriaBuilder() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+
 
     @Override
     public void persist(Object o) {
@@ -72,10 +72,13 @@ public class PersistenciaJDBC implements InterfacePersistencia{
                 Funcionario f = (Funcionario) o;
                 if(f.getCodigo() == null){
                     //insert
-                    ps = this.con.prepareStatement("insert into pessoa (nome, login, senha, codigo_cidade, tipoPessoa) values (?,?,?,?,?)");
-                    ps.setString(1, f.getNome());
-                    //..
-                    ps.setString(5, f.getTipoPessoa());
+                    ps = this.con.prepareStatement("insert into tb_pessoa (matricula, nome, login, senha, codigo_cidade, tipoPessoa) values (?,?,?,?,?,?)");
+                    ps.setString(1, f.getMatricula());
+                    ps.setString(2, f.getNome());
+                    ps.setString(3, f.getLogin());
+                    ps.setString(4, f.getSenha());
+                    ps.setInt(5, f.getCidade().getCodigo());
+                    ps.setString(6, f.getTipoPessoa());
                     ps.execute();                    
                 }else{                    
                     //update
@@ -85,10 +88,40 @@ public class PersistenciaJDBC implements InterfacePersistencia{
                     ps.execute();
                 }           
             }else if(o instanceof Pais){
-
+                
+                Pais e = (Pais) o;
+                if(e.getCodigo() == null){
+                    //insert
+                    ps = this.con.prepareStatement("insert into tb_pais (nome) values (?,?)");
+                    ps.setString(1, e.getNome());
+                    ps.execute();
+                }else{
+                    
+                }
             }else if(o instanceof Estado){
                 
+                Estado e = (Estado) o;
+                if(e.getCodigo() == null){
+                    //insert
+                    ps = this.con.prepareStatement("insert into tb_estado (nome, codigo_pais) values (?,?)");
+                    ps.setString(1, e.getNome());
+                    ps.setInt(2, e.getPais().getCodigo());
+                    ps.execute();
+                }else{
+                    
+                }
             }else if(o instanceof Cidade){
+                
+                Cidade c = (Cidade) o;
+                if(c.getCodigo() == null){
+                    //insert
+                    ps = this.con.prepareStatement("insert into tb_cidade (nome, codigo_cidade) values (?,?)");
+                    ps.setString(1, c.getNome());
+                    ps.setInt(2, c.getEstado().getCodigo());
+                    ps.execute();
+                }else{
+                    
+                }
                 
             }         
         }catch(SQLException e){
@@ -97,7 +130,33 @@ public class PersistenciaJDBC implements InterfacePersistencia{
     }
     @Override
     public List<Funcionario> listFuncionario() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Funcionario> listRetorno = null;
+        
+        try {
+            PreparedStatement ps = this.con.prepareStatement("select p.codigo, "
+                    + "p.nome, p.login, p.senha, c.codigo as codCidade, "
+                    + "c.nome as nomeCidade from "
+                    + "tb_pessoa p, tb_cidade c where p.codigo_cidade = c.codigo"
+                    + " and p.tipopessoa = ? order by p.codigo");
+            ps.setString(1, "F");
+            ResultSet rs = ps.executeQuery();
+            listRetorno = new ArrayList();
+            while(rs.next()) {
+                Funcionario f = new Funcionario();
+                f.setCodigo(rs.getInt("codigo"));
+                f.setNome(rs.getString("nome"));
+                f.setLogin(rs.getString("login"));
+                f.setSenha(rs.getString("senha"));
+                Cidade cidade = new Cidade();
+                cidade.setCodigo(rs.getInt("codCidade"));
+                cidade.setNome(rs.getString("nomeCidade"));
+                f.setCidade(cidade);
+                listRetorno.add(f);
+            }
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return listRetorno;
     }
 
     @Override
@@ -159,6 +218,11 @@ public class PersistenciaJDBC implements InterfacePersistencia{
         }
         
         return null;
+    }
+
+    @Override
+    public List<Reserva> listReservabyFiltro(Reserva r) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 

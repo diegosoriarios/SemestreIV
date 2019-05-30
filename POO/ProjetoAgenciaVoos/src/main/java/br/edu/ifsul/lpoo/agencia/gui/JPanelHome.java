@@ -1,37 +1,36 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.edu.ifsul.lpoo.agencia.gui;
 
 import br.edu.ifsul.lpoo.agencia.controle.Controle;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.GridBagConstraints;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
  *
- * @author diego
+ * @author Telmo Junior
  */
-public class JPanelHome extends JPanel {
-
-    private Controle controle;
-    private JLabel lblWelcome;
+public class JPanelHome extends JPanel{
+    
+    private Controle controle;    
+    private JLabel lblMenssagem;
     private FlowLayout flowLayout;
     
-    public JPanelHome(Controle c) {
+    //criar o construtor
+    //criar o metodo initComponents
+    //invocar o initComponents no construtor
+    public JPanelHome(Controle c){
+        
         this.controle = c;
+        
         initComponents();
     }
     
-    private void initComponents() {
-        lblWelcome = new JLabel("Tela de Boas Vindas!!");
-        lblWelcome.setForeground(Color.red);
-        flowLayout = new FlowLayout();
+    private void initComponents(){
+        flowLayout = new FlowLayout();//layout de fluxo: centro superior
+        lblMenssagem = new JLabel("Tela de Boas Vindas !!");
+        //tema: mudar a cor da letra
         this.setLayout(flowLayout);
-        this.add(lblWelcome);
+        this.add(lblMenssagem);
     }
 }

@@ -1,13 +1,15 @@
-/*
- * 
- */
+
 package br.edu.ifsul.lpoo.agencia.testes;
 
+import br.edu.ifsul.lpoo.agencia.model.Funcionario;
 import br.edu.ifsul.lpoo.agencia.model.Reserva;
 import br.edu.ifsul.lpoo.agencia.model.dao.InterfacePersistencia;
 import br.edu.ifsul.lpoo.agencia.model.dao.PersistenciaJPA;
+import java.util.List;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import org.junit.After;
 import org.junit.Before;
@@ -26,39 +28,34 @@ public class TesteCriteria {
         jpa = PersistenciaJPA.getInstance();
     } 
     
+     //Resposta para a Trabalho sobre Criteira da primeira etapa.
     @Test 
     public void testeConsultaCriteria(){
         
-        // criteria query
-        CriteriaBuilder builder = jpa.getCriteriaBuilder();
-        
-        CriteriaQuery<Reserva> query = builder.createQuery(Reserva.class);
-         
-         // raiz da consulta
-        Root<Reserva> raiz = query.from(Reserva.class);
-        
-        // definindo a raiz da consulta               
-        query.select(raiz);
-        
-        /* 
-        
-       
-       
-     
-        // criando um predicado para filtrar por duas duas expressoes        
-        Predicate predicate = builder.and( builder.like(raiz.<String>get("nome"), "%Mou%"),
-                                           builder.equal(raiz.<Integer>get("marca"), 1) );
-        // adicionando o predicado ao where
-        query.where(predicate);
-        // ordenando
-        query.orderBy(builder.asc(raiz.get("nome")));
-        // lancando uma consulta em uma coleção tipada
-        TypedQuery<Produto> q = em.createQuery(query);	
-		List<Produto> lista = q.getResultList();
-	for (Produto p : lista){
-		System.out.println("ID: "+p.getId()+ " Nome: "+p.getNome());
-	}   
-        */
+ 
+        InterfacePersistencia persistencia = PersistenciaJPA.getInstance();
+        if(persistencia.conexaoAberta()){
+            
+            Reserva r = new Reserva();
+            Funcionario f = new Funcionario();
+            f.setCodigo(4);//alterar se for preciso
+            r.setFuncionario(f);//caso for indicado um funcionario, irá filtrar
+            r.setObservacao("nada consta");//caso seja informado a observação irá filtrar
+            List<Reserva> lst =  persistencia.listReservabyFiltro(r);
+            
+            System.out.println("Reservas encontradas:");
+            for(Reserva reserva: lst){
+                
+                System.out.println("Codigo     : "+reserva.getCodigo());
+                System.out.println("Observaçâo : "+reserva.getObservacao());
+                System.out.println("Funcionario: "+reserva.getFuncionario().getNome());
+                System.out.println("Passageiro : "+reserva.getPassageiro().getNome());
+                
+            }
+            
+           // persistencia.fecharConexao();
+            
+        }
         
     }
     

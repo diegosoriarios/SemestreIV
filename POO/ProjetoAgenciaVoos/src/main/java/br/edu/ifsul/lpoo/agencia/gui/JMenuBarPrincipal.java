@@ -1,53 +1,69 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 package br.edu.ifsul.lpoo.agencia.gui;
 
 import br.edu.ifsul.lpoo.agencia.controle.Controle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author diego
+ * @author Telmo Junior
  */
 public class JMenuBarPrincipal extends JMenuBar implements ActionListener {
     //gerar um evento para o clique no menuitem sair
-    //fechar a conexao e finalizar o processo
-    
+    //fechar a conexao e finalizar o processo.
+    //System.exit(0);
     private Controle controle;
+    
     private JMenu menuArquivo;
     private JMenuItem menuItemSair;
     
-    public JMenuBarPrincipal(Controle c) {
+    private JMenu menuCadastros;
+    private JMenuItem menuItemFuncionario;
+    
+    public JMenuBarPrincipal(Controle c){        
         this.controle = c;
         initComponents();
     }
     
-    private void initComponents() {
+    private void initComponents(){
+        
         menuArquivo = new JMenu("Arquivo");
         menuItemSair = new JMenuItem("Sair");
-        menuItemSair.addActionListener(this);
-        //menuItemSair.addActionCommand("");
         
-        menuArquivo.add(menuItemSair);
-        this.add(menuArquivo);
+        menuItemSair.addActionListener(this);//adiciona para o sair o seu "Ouvidor"
+        menuItemSair.setActionCommand("menu_sair");//defini o comando de acao
+        
+        menuArquivo.add(menuItemSair);//adiciona o menuItem no "Pai"
+        this.add(menuArquivo);//adiciona o menu pai na barra
+        
+        menuCadastros = new JMenu("Cadastros");
+        menuItemFuncionario = new JMenuItem("Funcionário");
+        //adicionar o listerner e setar o comando de acao para o menuItemFuncionario
+        menuItemFuncionario.addActionListener(this);
+        menuItemFuncionario.setActionCommand("menu_funcionario");
+  
+        menuCadastros.add(menuItemFuncionario);
+        this.add(menuCadastros);        
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getActionCommand().equals(menuItemSair.getActionCommand())){
-            
-            System.out.println("Não estou me sentindo bem Sr Stark");
+        
+     if(e.getActionCommand().equals(menuItemSair.getActionCommand())){
+            //fechar a conexao com o BD
+            //matar o processo
             controle.fecharConexao();
             System.exit(0);
-        }                
+     }else if(e.getActionCommand().equals(menuItemFuncionario.getActionCommand())){
+         
+            controle.mostraCarta("tela_funcionario");
+     }
+        
     }
 }

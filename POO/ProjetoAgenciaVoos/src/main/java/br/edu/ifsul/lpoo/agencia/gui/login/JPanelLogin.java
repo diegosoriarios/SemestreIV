@@ -92,12 +92,15 @@ public class JPanelLogin extends JPanel implements ActionListener {
             if(usuario.length() > 0 && senha.length() > 0){
                 
                 //invocar o metodo login da classe PersistenciaJDBC                
-                System.out.println("Autenticação: " + controle.autenticar(usuario, senha));
-                if(controle.autenticar(usuario, senha)) {
+                if(controle.autenticar(usuario, senha)){
+                    
+                    //mostra a carta de "tela_home" e também o menu de barra
                     controle.mostraCarta("tela_home");
-                } else { 
-                    JOptionPane.showMessageDialog(this, "Usuário ou senha não cadastrado", "Erro", JOptionPane.ERROR_MESSAGE);
+                    
+                }else{
+                    JOptionPane.showMessageDialog(this, "Usuário e/ou Senha incorretos!", "Não autenticou", JOptionPane.ERROR_MESSAGE);
                 }
+                
                 //testar o retorno do metodo autenticar
             }else{
                 JOptionPane.showMessageDialog(this, "Informe Usuário e/ou Senha!", "Informe", JOptionPane.ERROR_MESSAGE);

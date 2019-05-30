@@ -23,13 +23,13 @@ import javax.persistence.Table;
 })
 public class Funcionario extends Pessoa implements Serializable{
     
-    @Column(nullable = false)    
+    @Column    
     private String matricula;
     
-    @Column(nullable = false)
+    @Column
     private String login;
     
-    @Column(nullable = false)
+    @Column
     private String senha;
     
     public Funcionario(){

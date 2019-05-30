@@ -4,11 +4,17 @@ package br.edu.ifsul.lpoo.agencia.model.dao;
 
 import br.edu.ifsul.lpoo.agencia.model.Funcionario;
 import br.edu.ifsul.lpoo.agencia.model.Pais;
+import br.edu.ifsul.lpoo.agencia.model.Reserva;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -49,11 +55,6 @@ public class PersistenciaJPA implements InterfacePersistencia {
         entity.close();
         factory.close();
         persistenciaJPA = null;
-    }
-
-    @Override
-    public CriteriaBuilder getCriteriaBuilder() {
-       return entity.getCriteriaBuilder();//assunto para as próximas aulas.
     }
     
     @Override
@@ -111,7 +112,47 @@ public class PersistenciaJPA implements InterfacePersistencia {
         return entity.find(t, id);
     }
 
-   
+    //Resposta para a Trabalho sobre Criteira da primeira etapa.
+    @Override
+    public List<Reserva> listReservabyFiltro(Reserva r){
+        
+        // criteria query
+        CriteriaBuilder builder = entity.getCriteriaBuilder();
+        
+        //cria a query
+        CriteriaQuery<Reserva> query = builder.createQuery(Reserva.class);
+         
+         // define a raiz da consulta
+        Root<Reserva> raiz = query.from(Reserva.class);
+        
+        // definindo a raiz da consulta               
+        query.select(raiz);        
+        
+        // cria uma lista para armazenar os predicados              
+        List<Predicate> predicados = new ArrayList();
+        
+        //adiciona na lista de predicados caso tenha uma observacao
+        if(r.getObservacao() != null){       
+            predicados.add(builder.and( builder.like(raiz.<String>get("observacao"), r.getObservacao())));
+        }
+        //adiciona na lista de predicados caso tenha funcionario
+        if(r.getFuncionario() != null){
+            predicados.add(builder.and( builder.equal(raiz.<Funcionario>get("funcionario"), r.getFuncionario())));
+        }
+        
+        //seta a lista de predicados na query
+        query.where(builder.and(predicados.toArray(new Predicate[predicados.size()])));
+        
+        // ordenando
+        query.orderBy(builder.asc(raiz.get("observacao")));
+        // lancando uma consulta em uma coleção tipada
+        
+        //gera uma TypedQuery
+        TypedQuery<Reserva> q = entity.createQuery(query);	
+        
+        //executa a query e retorna a lista
+        return q.getResultList();
+    }
     
     
     
