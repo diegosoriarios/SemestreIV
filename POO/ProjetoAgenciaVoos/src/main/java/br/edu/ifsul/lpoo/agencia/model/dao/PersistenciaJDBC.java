@@ -209,7 +209,16 @@ public class PersistenciaJDBC implements InterfacePersistencia{
                 }
 
            }else if(c == Cidade.class){
+                ps = this.con.prepareStatement("select codigo from tb_cidade where codigo = ?");
+                ps.setInt(1, Integer.parseInt(id.toString()));
 
+                ResultSet rs = ps.executeQuery();
+                if(rs.next()){
+                    Cidade city = new Cidade();
+                    city.setCodigo(rs.getInt("codigo"));
+                    //..
+                    return city;
+                }
            }
             
         }catch(Exception e){

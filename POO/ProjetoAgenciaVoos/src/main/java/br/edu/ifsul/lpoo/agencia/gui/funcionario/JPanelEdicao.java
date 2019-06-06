@@ -163,11 +163,28 @@ public class JPanelEdicao extends JPanel implements ActionListener {
             //Passo 2: validar a acao
             if(nome.length() > 0 && login.length() > 0 && senha.length() > 0 && indCid > 0) {
                 if(codigo.equals("")) {
-                    //Passo 3: persistir                    
+                    //Passo 3: persistir
                     //insert
+                    Funcionario func = new Funcionario();
+                    Cidade c = new Cidade();
+                    func.setCodigo(Integer.parseInt(codigo));
+                    func.setNome(nome);
+                    func.setLogin(login);
+                    func.setSenha(senha);
+                    c = (Cidade) f.getControle().getPersistencia().find(c.getClass(), Integer.valueOf(indCid));
+                    func.setCidade(c);
+                    f.getControle().getPersistencia().persist(func);
                 } else {
                     //Passo 3: persistir
                     //update
+                    Funcionario func = new Funcionario();
+                    Cidade c = new Cidade();
+                    func.setNome(nome);
+                    func.setLogin(login);
+                    func.setSenha(senha);
+                    c = (Cidade) f.getControle().getPersistencia().find(c.getClass(), Integer.valueOf(indCid));
+                    func.setCidade(c);
+                    f.getControle().getPersistencia().persist(func);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Preencha os valores", "", JOptionPane.INFORMATION_MESSAGE);
