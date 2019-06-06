@@ -82,8 +82,12 @@ public class PersistenciaJDBC implements InterfacePersistencia{
                     ps.execute();                    
                 }else{                    
                     //update
-                    ps = this.con.prepareStatement("update pessoa set nome = ?, login = ?, senha = ?, codigo_cidade = ?, tipoPessoa = ? where codigo = ? ");
-                    //...
+                    ps = this.con.prepareStatement("update tb_pessoa set nome = ?, login = ?, senha = ?, codigo_cidade = ?, tipoPessoa = ? where codigo = ? ");
+                    ps.setString(1, f.getNome());
+                    ps.setString(2, f.getLogin());
+                    ps.setString(3, f.getSenha());
+                    ps.setInt(4, f.getCidade().getCodigo());
+                    ps.setString(5 ,f.getTipoPessoa());
                     ps.setInt(6, f.getCodigo());
                     ps.execute();
                 }           

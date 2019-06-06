@@ -166,19 +166,25 @@ public class JPanelEdicao extends JPanel implements ActionListener {
             //if(nome.length() > 0 && login.length() > 0 && senha.length() > 0 && indCid > 0) {
             if(nome.length() > 0 && login.length() > 0 && senha.length() > 0) {
                 if(codigo.equals("")) {
+                    txfCodigo.setEditable(true);
                     //Passo 3: persistir
                     //insert
                     Funcionario func = new Funcionario();
                     Cidade c = new Cidade();
-                    func.setCodigo(new Random().nextInt());
+                    int rand = new Random().nextInt();
+                    func.setCodigo(rand);
                     func.setNome(nome);
                     func.setLogin(login);
                     func.setSenha(senha);
-                    c = (Cidade) f.getControle().getPersistencia().find(c.getClass(), Integer.valueOf(indCid));
-                        if(c != null) {
+                    func.setMatricula("");
+                    func.setTipoPessoa("F");
+                    c = (Cidade) f.getControle().getPersistencia().find(c.getClass(), indCid);
+                    if(c != null) {
                         func.setCidade(c);   
                     } else {
-                        func.setCidade(new Cidade());
+                        c = new Cidade();
+                        c.setCodigo(1);
+                        func.setCidade(c);
                     }
                     f.getControle().getPersistencia().persist(func);
                 } else {
