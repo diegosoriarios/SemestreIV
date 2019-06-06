@@ -10,6 +10,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -50,13 +52,13 @@ public class JPanelEdicao extends JPanel implements ActionListener {
         initComponents();
     }
     
-    public void setFuncionario(Funcionario f) {
-        if(f != null){
-            txfCodigo.setText(f.getCodigo().toString());
-            txfNome.setText(f.getNome());
-            txfLogin.setText(f.getLogin());
-            psfSenha.setText(f.getSenha());
-            cbxCidade.setSelectedItem(f.getCidade());
+    public void setFuncionario(Funcionario func) {
+        if(func != null){
+            txfCodigo.setText(func.getCodigo().toString());
+            txfNome.setText(func.getNome());
+            txfLogin.setText(func.getLogin());
+            psfSenha.setText(func.getSenha());
+            cbxCidade.setSelectedItem(func.getCidade());
         } else {
             txfCodigo.setText("");
             txfNome.setText("");
@@ -161,18 +163,23 @@ public class JPanelEdicao extends JPanel implements ActionListener {
             String senha = new String(psfSenha.getPassword()).trim();
             Integer indCid = cbxCidade.getSelectedIndex();
             //Passo 2: validar a acao
-            if(nome.length() > 0 && login.length() > 0 && senha.length() > 0 && indCid > 0) {
+            //if(nome.length() > 0 && login.length() > 0 && senha.length() > 0 && indCid > 0) {
+            if(nome.length() > 0 && login.length() > 0 && senha.length() > 0) {
                 if(codigo.equals("")) {
                     //Passo 3: persistir
                     //insert
                     Funcionario func = new Funcionario();
                     Cidade c = new Cidade();
-                    func.setCodigo(Integer.parseInt(codigo));
+                    func.setCodigo(new Random().nextInt());
                     func.setNome(nome);
                     func.setLogin(login);
                     func.setSenha(senha);
                     c = (Cidade) f.getControle().getPersistencia().find(c.getClass(), Integer.valueOf(indCid));
-                    func.setCidade(c);
+                        if(c != null) {
+                        func.setCidade(c);   
+                    } else {
+                        func.setCidade(new Cidade());
+                    }
                     f.getControle().getPersistencia().persist(func);
                 } else {
                     //Passo 3: persistir

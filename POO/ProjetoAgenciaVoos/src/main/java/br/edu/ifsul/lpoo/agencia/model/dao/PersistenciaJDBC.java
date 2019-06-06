@@ -161,7 +161,20 @@ public class PersistenciaJDBC implements InterfacePersistencia{
 
     @Override
     public void remove(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            if(o instanceof Funcionario){
+                PreparedStatement ps = this.con.prepareStatement("delete from tb_pessoa where codigo = ?");
+                
+                Funcionario func = (Funcionario) o;
+                System.out.println("Funcionario: " + func.getCodigo());
+                
+                ps.setInt(1, func.getCodigo());
+                ps.executeUpdate();
+                System.out.println("Aqui");
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
     
 
@@ -226,6 +239,23 @@ public class PersistenciaJDBC implements InterfacePersistencia{
             e.printStackTrace();
         }
         
+        return null;
+    }
+
+    
+    public List<Cidade> listCidade() {
+        List<Cidade> list = new ArrayList<Cidade>();
+        try {
+            PreparedStatement ps = this.con.prepareStatement("select * from tb_cidade");
+            ResultSet rs = ps.executeQuery();
+            System.out.println(rs);
+            if(rs.next()){
+                list.add((Cidade) rs);
+            }
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return null;
     }
 

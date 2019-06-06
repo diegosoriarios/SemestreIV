@@ -124,6 +124,24 @@ public class JPanelListagem extends JPanel implements ActionListener {
             } else {
                 JOptionPane.showMessageDialog(this, "Selecione linha para editar", "Selecione", JOptionPane.INFORMATION_MESSAGE);
             }
+        } else if (e.getActionCommand().equals(btnExcluir.getActionCommand())){
+            //verificar se o usuário selecionou uma linha
+            //recuperar o codigo do funcionario selecionado
+            int linhaSel = tblListagem.getSelectedRow();
+            if(linhaSel > -1) {
+                int codFunc = new Integer(modeloTabela.getValueAt(linhaSel, 0).toString());
+                
+                for(Funcionario func: listFuncionario){
+                    if(func.getCodigo().intValue() == codFunc) {
+                        f.getControle().getPersistencia().remove(func);
+                        populaListagem();
+                        f.mostraCarta("tela_home");
+                        break;
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Selecione linha para remover", "Selecione", JOptionPane.INFORMATION_MESSAGE);
+            }
         }
     }
 }
