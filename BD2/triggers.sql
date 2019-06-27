@@ -15,29 +15,23 @@ declare
 begin
 	if(tg_op='INSERT') then
 		if(new.qtde is not null) then
-			-- Criando uma compra, ou seja removendo do estoque
 			update mercadorias set estoque = (estoque - new.qtde) where codigo = new.mercadoria;
 		end if;
-		-- adicionando valor a venda
 		update vendas set valor_total = (valor_total + new.valor_total) where codigo = new.venda;
 	end if;
 	
 	if(tg_op='UPDATE') then
 		if(new.qtde is not null) then
-			-- Altera o estoque de uma compra já existente
 			update mercadorias set estoque = estoque + old.qtde - new.qtde where codigo = new.mercadoria;
 		end if;
-		-- Adicionando valor a venda
 		update vendas set valor_total = (valor_total - old.valor_total + new.valor_total) where codigo = new.venda;
 		return new;
 	end if;
 	
 	if(tg_op='DELETE') then
 		if(old.qtde is not null and old.qtde > 0) then
-			-- O estoque fica maior porque uma compra foi cancelada
 			update mercadorias set estoque = estoque + old.qtde where codigo = old.mercadoria;
 		end if;
-		-- O valor total dessa compra é diminuido com o valor anterior
 		update vendas set valor_total = (valor_total - old.valor_total) where codigo = old.venda;
 		return old;
 	end if;
@@ -60,29 +54,23 @@ declare
 begin
 	if(tg_op='INSERT') then
 		if(new.qtde is not null) then
-			-- Adiciona produtos ao estoque
 			update mercadorias set estoque = (estoque + new.qtde) where codigo = new.mercadoria;
 		end if;
-		--atualiza o total das compras (insert, delete e update em compras_mercadorias)
 		update compras set valor_total = (valor_total + new.valor_total) where codigo = new.compra;
 	end if;
 	
 	if(tg_op='UPDATE') then
 		if(new.qtde is not null) then
-			--atualiza o estoque da mercadoria comprada (insert, delete e update em compras_mercadorias)
 			update mercadorias set estoque = estoque - old.qtde + new.qtde where codigo = new.mercadoria;
 		end if;
-		--atualiza o total das compras (insert, delete e update em compras_mercadorias)
 		update compras set valor_total = (valor_total - old.valor_total + new.valor_total) where codigo = new.compra;
 		return new;
 	end if;
 	
 	if(tg_op='DELETE') then
 		if(old.qtde is not null and old.qtde > 0) then
-			--atualiza o estoque da mercadoria comprada (insert, delete e update em compras_mercadorias)
 			update mercadorias set estoque = estoque - old.qtde where codigo = old.mercadoria;
 		end if;
-		--atualiza o total das compras (insert, delete e update em compras_mercadorias)
 		update compras set valor_total = (valor_total - old.valor_total) where codigo = old.compra;
 		return old;
 	end if;
